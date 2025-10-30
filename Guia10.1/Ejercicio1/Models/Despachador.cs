@@ -26,10 +26,12 @@ namespace Ejercicio1.Models
         {
             if (camion.TieneCapacidadDisponible()==true)
             {
-                Paquete paquete = depositos.Dequeue();
-
-                camion.Cargar(paquete);
-                return paquete;
+                if (depositos.Count>0)
+                {
+                    Paquete paquete = depositos.Dequeue();                    
+                        camion.Cargar(paquete);
+                        return paquete;
+                }
             }
             return null;
         }

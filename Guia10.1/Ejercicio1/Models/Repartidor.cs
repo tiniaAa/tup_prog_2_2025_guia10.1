@@ -21,7 +21,7 @@ namespace Ejercicio1.Models
         {
             if (entregas.Count()>0)
             {
-                Paquete paquete =entregas.Peek();
+                return entregas.Peek();
 
             }
             return null ;
