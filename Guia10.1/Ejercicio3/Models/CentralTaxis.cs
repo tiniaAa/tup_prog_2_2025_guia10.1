@@ -15,12 +15,13 @@ namespace Ejercicio3.Models
 
         public CentralTaxis()
         {
-            for (int n=0; n<4;n++)
+            for (int n=0; n<=10; n++)
             {
                 movilesDisponibles.Enqueue(new Movil(n));
             }
         }
-        public int CantidadDisponible { get {return movilesDisponibles.Count() } }
+        public int CantidadDisponible { get { return movilesDisponibles.Count(); } }
+
 
         public Pedido RecibirSolucitud(string direccion, string telefono)
         {
@@ -29,6 +30,17 @@ namespace Ejercicio3.Models
            pedidos.Enqueue(pedido);
             
             return pedido;
+
+        }
+        public Movil VerificarMovil(int n)
+        {
+            Movil movilDisponible = null;
+            if (n>0 && n<CantidadDisponible)
+            {
+                movilDisponible = movilesDisponibles.ToArray()[n];
+                return movilDisponible;
+            }
+            return movilDisponible;
 
         }
         public Movil AsignarCoche()
@@ -46,19 +58,27 @@ namespace Ejercicio3.Models
             }
             return null;
         }
-        public void LiberarVehiculo(int numero)
+        public Movil LiberarVehiculo(int numero)
         {
+            LinkedListNode<Movil> nodo = movilesOcupados.First;
 
-            Movil MoviLibre = null;
-
-            LinkedList<Movil> nodo = movilesOcupados.First as Movil ;
-            while ()
+            while (nodo != null)
             {
+                if (nodo.Value.Numero == numero)
+                {
+                    
+                    Movil movilLibre = nodo.Value;
+                    movilLibre.Pasajero = null;
+                    movilesDisponibles.Enqueue(movilLibre);
 
+                    
+                    movilesOcupados.Remove(nodo);
+
+                    return movilLibre;
+                }
+                nodo = nodo.Next;
             }
-
+            return null;
         }
-
-       
     }
 }

@@ -25,5 +25,9 @@ namespace Ejercicio3.Models
             }
             return -1;
         }
+        public override string ToString()
+        {
+            return $"Movil numero {Numero}";
+        }
     }
 }
